@@ -3,19 +3,33 @@
     class="task bg-white dark:bg-gray-600 p-2 rounded shadow-sm max-w-full flex cursor-pointer"
   >
     <DragHandle class="pr-2" />
-    <div>
+    <div class="w-full">
       <div class="w-full text-md">
         {{ task.title }}
       </div>
       <div class="text-xs text-gray-500">
         Priority: {{ task.priority }}
       </div>
+      <div class="flex justify-end pt-2.5">
+        <UButton
+          icon="i-material-symbols:delete-forever"
+          size="2xs"
+          color="red"
+          square
+          variant="solid"
+          @click.stop="deleteTask(task.id)"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useBoard } from "@/store/board";
+
 import type { Task } from "@/types";
+
+const { deleteTask } = useBoard();
 
 defineProps<{
   task: Task
