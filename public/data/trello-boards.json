@@ -1,0 +1,45 @@
+[
+  {
+    "id": "i5N-PbKVfvZfk8wkNKC8X",
+    "title": "TODO",
+    "tasks": [
+      {
+        "id": "OY5fjdzdXfXP1lQxU2_q8",
+        "title": "Create marketing landing page",
+        "description": "Task description",
+        "responsiblePerson": "Vlad Kurluk",
+        "contractor": "Ivan",
+        "status": "TODO",
+        "priority": "High"
+      },
+      {
+        "id": "jp-JvMsymOGP6dlP703rz",
+        "title": "Develop cool new feature",
+        "description": "Some task description",
+        "responsiblePerson": "Vlad Kurluk",
+        "contractor": "Ivan",
+        "status": "TODO",
+        "priority": "High"
+      },
+      {
+        "id": "TwaEBxTEHZNQYqmgY6exE",
+        "title": "Fix page nav bug",
+        "description": "Some task description",
+        "responsiblePerson": "Vlad Kurluk",
+        "contractor": "Ivan",
+        "status": "TODO",
+        "priority": "High"
+      }
+    ]
+  },
+  {
+    "id": "OcABjTAykPG-hdFBF0uIn",
+    "title": "In progress",
+    "tasks": []
+  },
+  {
+    "id": "wh7Dt005qpF8f9yqoxlBZ",
+    "title": "Done",
+    "tasks": []
+  }
+]
