@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt'
   ],
   ssr: false,
   compatibilityDate: '2024-11-01',

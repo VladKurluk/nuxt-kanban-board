@@ -6,15 +6,22 @@ export const useBoard = defineStore("board", () => {
   const initialized = ref(false);
 
   async function initialize() {
-    if (initialized.value) return;
+    const storedBoard = localStorage.getItem("board");
+    const parsedBoard = storedBoard ? JSON.parse(storedBoard) : null;
+  
+    if (initialized.value || parsedBoard) return;
     initialized.value = true;
-
-    const { data: boardData } = await useFetch<Column[]>(
-      "/data/trello-boards.json",
-    );
-
-    if (boardData.value) {
-      columns.value = boardData.value;
+  
+    try {
+      const { data: boardData } = await useFetch<Column[]>(
+        "/data/trello-boards.json",
+      );
+  
+      if (boardData.value) {
+        columns.value = boardData.value;
+      }
+    } catch (error) {
+      console.error("Failed to fetch board data:", error);
     }
   }
 
@@ -89,6 +96,13 @@ export const useBoard = defineStore("board", () => {
     updateTask,
     deleteTask,
     columns,
+    initialized,
     statusesByColumn
   };
-});
+},
+{
+  persist: {
+    storage: piniaPluginPersistedstate.localStorage(),
+  },
+}
+);
