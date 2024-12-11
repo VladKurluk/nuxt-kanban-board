@@ -7,7 +7,7 @@
       <div class="w-full text-md">
         {{ task.title }}
       </div>
-      <div class="text-xs text-gray-500 py-2">
+      <div class="text-xs text-gray-500 dark:text-gray-200 py-2">
         Priority: {{ task.priority }}
       </div>
       <div class="flex justify-between items-center">

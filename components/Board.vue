@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NewTask } from "#components";
-import draggable from "vuedraggable";
 import { storeToRefs } from "pinia";
+import { nanoid } from "nanoid";
 import { useBoard } from "@/store/board";
 
 import type { Column, Task } from "@/types";
@@ -43,6 +43,22 @@ const createTaskHandler = (status: string) => {
 const editTaskHandler = (status: string, task?: Task) => {
   openModal(status, task);
 };
+
+const createColumn = (): void => {
+  const column: Column = {
+    id: nanoid(),
+    title: "",
+    tasks: [],
+  };
+  columns.value.push(column);
+  nextTick(() => {
+    (
+      document.querySelector(
+        ".column:last-of-type .title-input"
+      ) as HTMLInputElement
+    ).focus();
+  });
+}
 </script>
 
 <template>
@@ -66,11 +82,19 @@ const editTaskHandler = (status: string, task?: Task) => {
           }"
         >
           <template #header>
-            <header class="font-bold">
+            <header class="font-bold flex items-center">
               <DragHandle />
-              <span class="bg-transparent px-1 w-full">
-                {{ column.title }}
-              </span>
+              <input
+                class="title-input bg-transparent focus:bg-white dark:focus:bg-gray-600 rounded px-1 w-full"
+                @keyup.enter="($event.target as HTMLInputElement).blur()"
+                @keydown.backspace="
+                  column.title === ''
+                    ? (columns = columns.filter((c) => c.id !== column.id))
+                    : null
+                "
+                type="text"
+                v-model="column.title"
+              />
             </header>
           </template>
 
@@ -105,7 +129,9 @@ const editTaskHandler = (status: string, task?: Task) => {
         </UCard>
       </template>
     </draggable>
-
+    <UButton @click="createColumn">
+      + Add Column
+    </UButton>
     <UModals />
   </div>
 </template>

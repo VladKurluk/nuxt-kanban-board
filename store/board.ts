@@ -18,6 +18,8 @@ export const useBoard = defineStore("board", () => {
     }
   }
 
+  const statusesByColumn = computed(() => columns.value.map((column) => column.title));
+
   function createTask (payload: Task) {
     const columnIdx = columns.value.findIndex(
       (column) => column.title === payload.status
@@ -86,6 +88,7 @@ export const useBoard = defineStore("board", () => {
     createTask,
     updateTask,
     deleteTask,
-    columns
+    columns,
+    statusesByColumn
   };
 });

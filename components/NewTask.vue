@@ -71,7 +71,7 @@
               <USelect
                 color="primary"
                 variant="outline"
-                :options="['TODO', 'In progress', 'Done']"
+                :options="statusesByColumn"
                 v-model="task.status" 
               />
             </UFormGroup>   
@@ -124,6 +124,7 @@ import type { Task, User } from "@/types";
 import type { FormSubmitEvent } from "#ui/types";
 
 const { createTask, updateTask, deleteTask } = useBoard();
+const { statusesByColumn } = storeToRefs(useBoard());
 const { users } = storeToRefs(useUsers());
 const modal = useModal();
 
