@@ -7,11 +7,22 @@
       <div class="w-full text-md">
         {{ task.title }}
       </div>
-      <div class="text-xs text-gray-500">
+      <div class="text-xs text-gray-500 py-2">
         Priority: {{ task.priority }}
       </div>
-      <div class="flex justify-end pt-2.5">
+      <div class="flex justify-between items-center">
+        <UAvatarGroup size="sm" :max="2">
+          <div
+            v-for="user in task.responsiblePerson"
+            :key="user.id"
+          >
+            <UTooltip :text="user.name">
+              <UAvatar :alt="user.name" />
+            </UTooltip>
+          </div>
+        </UAvatarGroup>
         <UButton
+          class="shrink-0"
           icon="i-material-symbols:delete-forever"
           size="2xs"
           color="red"

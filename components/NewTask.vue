@@ -1,10 +1,20 @@
 <template>
   <UModal>
     <UCard>
+      <div class="flex justify-end">
+        <UButton
+          color="gray"
+          variant="ghost"
+          icon="i-heroicons-x-mark-20-solid"
+          class="-my-1"
+          @click="modal.close()"
+        />
+      </div>
       <UForm
         :schema="schema"
         :state="task"
         class="space-y-4"
+        :validateOn="['submit', 'blur']"
         @submit="onSubmit"
       >
         <UFormGroup label="Title" name="title">
@@ -24,6 +34,36 @@
             v-model="task.description"
           />
         </UFormGroup>
+
+        <div class="flex justify-between gap-2.5">
+          <div class="w-1/2">
+            <UFormGroup label="Responsible Person" name="responsiblePerson">
+              <USelectMenu
+                v-model="task.responsiblePerson"
+                :options="users"
+                multiple
+                placeholder="Select responsible person"
+                color="primary"
+                variant="outline"
+                option-attribute="name"
+                by="name"
+              />
+            </UFormGroup>
+          </div>
+          <div class="w-1/2">
+            <UFormGroup label="Contractor" name="contractor">
+              <USelectMenu
+                v-model="task.contractor"
+                :options="users"
+                placeholder="Select contractor"
+                color="primary"
+                variant="outline"
+                option-attribute="name"
+                by="name"
+              />
+            </UFormGroup>
+          </div>
+        </div>
 
         <div class="flex justify-between py-2.5 gap-2.5">
           <div class="w-1/2">
@@ -74,14 +114,17 @@
 </template>
 
 <script setup lang="ts">
-import { object, string, type InferType } from "yup";
+import { object, string, array, type InferType } from "yup";
 import { nanoid } from "nanoid";
+import { storeToRefs } from "pinia";
 import { useBoard } from "@/store/board";
+import { useUsers } from "@/store/users";
 
-import type { Task } from "@/types";
+import type { Task, User } from "@/types";
 import type { FormSubmitEvent } from "#ui/types";
 
 const { createTask, updateTask, deleteTask } = useBoard();
+const { users } = storeToRefs(useUsers());
 const modal = useModal();
 
 const props = defineProps<{
@@ -92,19 +135,29 @@ const props = defineProps<{
 
 const task = ref<Task>(
   props.taskData 
-    ? { ...props.taskData } 
+    ? { ...props.taskData }
     : {
       id: nanoid(),
       title: "",
       description: "",
+      responsiblePerson: [],
+      contractor: {},
       status: props.status,
       priority: ""
-    } as Task
+    }
 );
 
 const schema = object({
   title: string().min(5, 'Must be at least 5 characters').required('Required'),
   description: string().required('Required'),
+  responsiblePerson: array()
+    .min(1, 'The Responsible Person must not be empty')
+    .required('Required'),
+  contractor: object().test(
+    'non-empty-object',
+    'Contractor is required',
+    (value) => Object.keys(value).length > 0
+  ),
   status: string().required('Required'),
   priority: string().required('Required'),
 });

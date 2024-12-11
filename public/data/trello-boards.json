@@ -7,8 +7,14 @@
         "id": "OY5fjdzdXfXP1lQxU2_q8",
         "title": "Create marketing landing page",
         "description": "Task description",
-        "responsiblePerson": "Vlad Kurluk",
-        "contractor": "Ivan",
+        "responsiblePerson": [
+          { "id": "uh7nmGA-XqGFaidPt5Ndc", "name": "Firsrt Person" },
+          { "id": "O0Wk6LQI_7muLccvWt1wu", "name": "Second Person" }
+        ],
+        "contractor": {
+          "id": "cIdfw79jqwk-peoq-BZNR",
+          "name": "Thomas Anderson"
+        },
         "status": "TODO",
         "priority": "High"
       },
@@ -16,8 +22,13 @@
         "id": "jp-JvMsymOGP6dlP703rz",
         "title": "Develop cool new feature",
         "description": "Some task description",
-        "responsiblePerson": "Vlad Kurluk",
-        "contractor": "Ivan",
+        "responsiblePerson": [
+          { "id": "iWDFmzsk1sldgaHzGbOC5", "name": "Firsrt Person" }
+        ],
+        "contractor": {
+          "id": "ivXDAKt0bo27KzuGJFKWa",
+          "name": "Jhon Doe"
+        },
         "status": "TODO",
         "priority": "High"
       },
@@ -25,8 +36,13 @@
         "id": "TwaEBxTEHZNQYqmgY6exE",
         "title": "Fix page nav bug",
         "description": "Some task description",
-        "responsiblePerson": "Vlad Kurluk",
-        "contractor": "Ivan",
+        "responsiblePerson": [
+          { "id": "W2b4R9VMD7NNF3MHwvSFH", "name": "Second Person" }
+        ],
+        "contractor": {
+          "id": "CpDUe9tsij8JqrZhtO1ed",
+          "name": "Jane Lawson"
+        },
         "status": "TODO",
         "priority": "High"
       }
